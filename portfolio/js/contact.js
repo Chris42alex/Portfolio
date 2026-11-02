@@ -1,0 +1,53 @@
+/* Contact: selection-box size label, socials, and a 3-step sticky-note form that opens a pre-filled email */
+(() => {
+  const email = CONFIG.links.Email.replace("mailto:", "");
+  $("contactMail").textContent = email; $("contactMail").href = CONFIG.links.Email;
+  // Official brand marks (Simple Icons, CC0), 24×24 paths with brand colours
+  const ICONS = {
+    LinkedIn:["#0A66C2","M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"],
+    GitHub:["#181717","M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"],
+    Behance:["#1769FF","M16.969 16.927a2.561 2.561 0 0 0 1.901.677 2.501 2.501 0 0 0 1.531-.475c.362-.235.636-.584.779-.99h2.585a5.091 5.091 0 0 1-1.9 2.896 5.292 5.292 0 0 1-3.091.88 5.839 5.839 0 0 1-2.284-.433 4.871 4.871 0 0 1-1.723-1.211 5.657 5.657 0 0 1-1.08-1.874 7.057 7.057 0 0 1-.383-2.393c-.005-.8.129-1.595.396-2.349a5.313 5.313 0 0 1 5.088-3.604 4.87 4.87 0 0 1 2.376.563c.661.362 1.231.87 1.668 1.485a6.2 6.2 0 0 1 .943 2.133c.194.821.263 1.666.205 2.508h-7.699c-.063.79.184 1.574.688 2.187ZM6.947 4.084a8.065 8.065 0 0 1 1.928.198 4.29 4.29 0 0 1 1.49.638c.418.303.748.711.958 1.182.241.579.357 1.203.341 1.83a3.506 3.506 0 0 1-.506 1.961 3.726 3.726 0 0 1-1.503 1.287 3.588 3.588 0 0 1 2.027 1.437c.464.747.697 1.615.67 2.494a4.593 4.593 0 0 1-.423 2.032 3.945 3.945 0 0 1-1.163 1.413 5.114 5.114 0 0 1-1.683.807 7.135 7.135 0 0 1-1.928.259H0V4.084h6.947Zm-.235 12.9c.308.004.616-.029.916-.099a2.18 2.18 0 0 0 .766-.332c.228-.158.411-.371.534-.619.142-.317.208-.663.191-1.009a2.08 2.08 0 0 0-.642-1.715 2.618 2.618 0 0 0-1.696-.505h-3.54v4.279h3.471Zm13.635-5.967a2.13 2.13 0 0 0-1.654-.619 2.336 2.336 0 0 0-1.163.259 2.474 2.474 0 0 0-.738.62 2.359 2.359 0 0 0-.396.792c-.074.239-.12.485-.137.734h4.769a3.239 3.239 0 0 0-.679-1.785l-.002-.001Zm-13.813-.648a2.254 2.254 0 0 0 1.423-.433c.399-.355.607-.88.56-1.413a1.916 1.916 0 0 0-.178-.891 1.298 1.298 0 0 0-.495-.533 1.851 1.851 0 0 0-.711-.274 3.966 3.966 0 0 0-.835-.073H3.241v3.631h3.293v-.014ZM21.62 5.122h-5.976v1.527h5.976V5.122Z"]
+  };
+  $("socials").innerHTML = Object.entries(CONFIG.links).filter(([k]) => ICONS[k])
+    .map(([k, v]) => `<a href="${v}" target="_blank" rel="noopener" aria-label="${k}"><svg viewBox="0 0 24 24" fill="${ICONS[k][0]}" aria-hidden="true"><path d="${ICONS[k][1]}"/></svg>${k.toUpperCase()}</a>`).join("");
+
+  // Figma-like "W × H" readout under the selection box, live while it resizes on hover
+  const sizeLabel = () => { const r = $("selBox").getBoundingClientRect(); $("selSize").textContent = `${Math.round(r.width)} × ${Math.round(r.height)}`; };
+  new ResizeObserver(sizeLabel).observe($("selBox"));
+
+  const STEPS = [
+    { key:"message", label:"Tell me a story, or a project idea…", type:"textarea", placeholder:"Type here…" },
+    { key:"name",    label:"Nice! What should I call you?",       type:"text",     placeholder:"Your name" },
+    { key:"email",   label:"Where can I reply?",                   type:"email",    placeholder:"you@email.com" }
+  ];
+  const data = {}; let step = 0;
+  function render(){
+    const s = STEPS[step], old = $("stepInput");
+    const input = document.createElement(s.type === "textarea" ? "textarea" : "input");
+    input.id = "stepInput"; input.className = "step-input"; input.placeholder = s.placeholder;
+    if (s.type === "textarea") input.rows = 4; else input.type = s.type;
+    input.value = data[s.key] || "";
+    old.replaceWith(input);
+    $("stepLabel").textContent = s.label; $("stepLabel").style.animation = "none"; void $("stepLabel").offsetWidth; $("stepLabel").style.animation = "";
+    $("stepNext").textContent = step < STEPS.length - 1 ? `NEXT (${step + 1}/${STEPS.length})` : `SEND ✉ (${STEPS.length}/${STEPS.length})`;
+    $("stepBack").hidden = step === 0; $("stepErr").textContent = "";
+    if (step > 0) input.focus();
+  }
+  function fail(msg){ $("stepErr").textContent = msg; $("contactForm").classList.remove("shake"); void $("contactForm").offsetWidth; $("contactForm").classList.add("shake"); }
+  $("contactForm").onsubmit = e => {
+    e.preventDefault();
+    const s = STEPS[step], v = $("stepInput").value.trim();
+    if (!v) return fail("write something first ✎");
+    if (s.type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return fail("that email looks off");
+    data[s.key] = v;
+    if (step < STEPS.length - 1){ step++; render(); return; }
+    const href = `mailto:${email}?subject=${encodeURIComponent("Hello from " + data.name)}&body=${encodeURIComponent(data.message + "\n\n— " + data.name + " (" + data.email + ")")}`;
+    location.href = href;
+    $("contactForm").innerHTML = `<div class="note-done">Thanks, ${data.name.replace(/[<>&]/g, "")}! ✦<br>Your mail app is opening…<a href="${href}">Didn't open? Click here</a></div>`;
+  };
+  $("stepBack").onclick = () => { data[STEPS[step].key] = $("stepInput").value; step--; render(); };
+  // Enter moves on in single-line steps; Ctrl/Cmd+Enter in the message box
+  $("contactForm").addEventListener("keydown", e => {
+    if (e.key === "Enter" && e.target.tagName === "TEXTAREA" && (e.ctrlKey || e.metaKey)){ e.preventDefault(); $("stepNext").click(); }
+  });
+})();

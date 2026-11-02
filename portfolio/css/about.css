@@ -1,0 +1,12 @@
+/* Sticky note + "I build with AI" line under the desk */
+
+/* ---------- Sticky note + manifesto ---------- */
+#manifesto{padding:60px 16px 120px;text-align:center}
+.sticky{width:min(380px,100%);margin:0 auto 80px;background:#fde68a;padding:44px 32px 32px;
+  box-shadow:0 18px 30px rgba(0,0,0,.12);transform:rotate(-2deg);position:relative;
+  font:15px/1.7 var(--mono);color:#4a4a4a;text-align:left}
+.sticky::before{content:"";position:absolute;top:-12px;left:50%;width:110px;height:28px;transform:translateX(-50%) rotate(2deg);
+  background:rgba(255,255,255,.55);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.lines{font:clamp(15px,2vw,19px)/2.2 var(--mono);max-width:760px;margin:0 auto;color:#333}
+.lines .box{border:1.5px solid #333;padding:2px 8px;border-radius:4px;white-space:nowrap;background:#fff}
+.lines .hl{background:linear-gradient(transparent 60%,var(--accent) 60%)}

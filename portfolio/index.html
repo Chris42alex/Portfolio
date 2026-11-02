@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chris Alex — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500;700&family=Anton&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/loader.css">
+<link rel="stylesheet" href="css/desk.css">
+<link rel="stylesheet" href="css/about.css">
+<link rel="stylesheet" href="css/work.css">
+<link rel="stylesheet" href="css/contact.css">
+<link rel="stylesheet" href="css/responsive.css">
+<script src="js/config.js" defer></script>
+<script src="js/core.js" defer></script>
+<script src="js/loader.js" defer></script>
+<script src="js/desk.js" defer></script>
+<script src="js/music.js" defer></script>
+<script src="js/work.js" defer></script>
+<script src="js/contact.js" defer></script>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="logo" href="#about" id="navLogo">CA</a>
+  <a href="#about">About</a>
+  <a href="#work">Work</a>
+  <a href="#contact">Contact</a>
+  <a class="nav-resume" id="navResume" href="#" target="_blank" rel="noopener">Résumé ↗</a>
+</nav>
+
+<!-- LOADER -->
+<div id="loader" aria-label="Loading">
+  <div class="glow" id="glow"></div>
+  <div class="word" id="word"></div>
+  <div class="loader-foot"><span>PORTFOLIO ©2026</span><span id="loadPct">000</span></div>
+  <div class="loader-bar" id="loadBar"></div>
+</div>
+
+<!-- DESK / ABOUT -->
+<div class="paper">
+<section id="about">
+  <div class="obj plant reveal"><svg width="110" height="130" viewBox="0 0 110 130">
+    <path d="M55 80 C40 50 10 50 8 30 C30 30 50 45 55 80Z" fill="#4f9d69"/>
+    <path d="M55 80 C70 45 100 45 104 22 C80 25 60 40 55 80Z" fill="#3f8a5a"/>
+    <path d="M55 82 C52 50 60 20 56 4 C70 25 66 55 55 82Z" fill="#5fb37a"/>
+    <path d="M30 80h50l-7 46H37z" fill="#f1ede6" stroke="#ddd6ca" stroke-width="2"/></svg></div>
+
+  <div class="obj badge reveal" id="badge">
+    <div class="swing">
+      <div class="lanyard"><div class="strap"></div><div class="ring"></div><div class="clip"></div></div>
+      <div class="idcard" id="idcard">
+        <div class="idphoto"><img src="assets/images/chris.jpg" alt="Photo of Chris Alex"></div>
+        <svg class="strokes" viewBox="0 0 236 344" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M-20 300 C 60 266, 150 330, 260 282" stroke-width="26"/>
+          <path d="M-10 334 C 80 306, 160 352, 260 318" stroke-width="10"/>
+        </svg>
+        <span class="idmark" id="idMark">CA©</span>
+        <i class="dash d1"></i><i class="dash d2"></i><i class="dash d3"></i>
+        <div class="idlabel">Designer</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="obj bcard reveal" id="bcard" role="link" tabindex="0" title="Open my résumé">
+    <div class="sheet" aria-hidden="true"><b>RESUME</b><i></i><i></i><i></i><i></i></div>
+    <div class="face front">
+      <ul id="bcInfo"></ul>
+      <span class="bc-cta">View résumé <b>↗</b></span>
+    </div>
+  </div>
+
+  <div class="obj hero-name reveal">
+    <h1 id="heroName">Chris Alex</h1>
+    <p id="heroRole" style="letter-spacing:.04em;font-size:12px;color:var(--ink)"></p>
+  </div>
+
+  <div class="obj led matrix reveal" id="matrix" title="Figma"></div>  <div class="obj led led-claude reveal" id="ledClaude" title="Claude"></div>
+
+  <div class="obj player reveal" id="player">
+    <small><span>NOW PLAYING</span><span class="eq"><b></b><b></b><b></b><b></b></span></small>
+    <div class="deck">
+      <div class="disc"><div class="label">LO·FI</div></div>
+      <div class="arm"></div>
+    </div>
+    <h4 id="trkTitle">Late Night Commits</h4>
+    <div class="artist" id="trkArtist">Chris's Lo-fi Radio · 1/3</div>
+    <div class="bar"><i id="trkBar"></i></div>
+    <div class="times"><span id="trkNow">0:00</span><span id="trkLen">0:00</span></div>
+    <div class="ctrls">
+      <button id="prevBtn" aria-label="Previous track"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+      <button class="pp" id="ppBtn" aria-label="Play"><svg id="ppIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></button>
+      <button id="nextBtn" aria-label="Next track"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
+    </div>
+  </div>
+
+  <div class="obj terminal reveal">
+    <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>chris — zsh</span></div>
+    <pre id="term"></pre>
+  </div>
+
+  <div class="obj studio reveal">
+    <div class="editor">
+      <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="tab">Card.jsx</span></div>
+      <pre id="code"></pre>
+    </div>
+    <div class="palette">
+      <small>DESIGN TOKENS</small>
+      <div class="sw" id="swatches"></div>
+      <div class="type">
+        <b>Aa</b><b>Aa</b>
+        <p>Inter · 800<br>Caveat · 700<br>8pt grid</p>
+      </div>
+      <div class="tools" id="tools"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section id="manifesto">
+  <div class="sticky reveal">Half designer, half developer, always in “LET ME TRY THIS” mode.</div>
+  <p class="lines reveal">
+    ✦ <span class="box">I build with AI,</span> prototyping ideas and exploring
+    the edge of design and technology.
+  </p>
+</section>
+
+<!-- WORK / FINDER -->
+<section id="work">
+  <div class="finder reveal">
+    <div class="top"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i>
+      <button class="back" id="backBtn" aria-label="Back" disabled>‹</button><span id="finderPath">~/chris/projects</span></div>
+    <div class="wrap">
+      <aside id="side"></aside>
+      <div id="main"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-mid">
+    <div class="say-hi reveal">say hi <svg width="46" height="14" viewBox="0 0 46 14"><path d="M2 8 C 10 2, 16 13, 24 7 S 38 2, 44 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+    <h2 class="sel-box reveal" id="selBox"><span>CONTACT</span><i class="h tl"></i><i class="h tr"></i><i class="h bl"></i><i class="h br"></i>
+      <em class="sel-size" id="selSize"></em></h2>
+
+    <form class="note reveal" id="contactForm" novalidate>
+      <p class="note-intro">Got a project, or just want to say hi? Send it over — I read every message.</p>
+      <label class="step-label" id="stepLabel" for="stepInput">Tell me a story, or a project idea…</label>
+      <textarea class="step-input" id="stepInput" rows="4" placeholder="Type here…"></textarea>
+      <div class="note-actions">
+        <button type="button" class="note-back" id="stepBack" hidden>← back</button>
+        <span class="note-err" id="stepErr" role="alert"></span>
+        <button type="submit" class="note-next" id="stepNext">NEXT (1/3)</button>
+      </div>
+    </form>
+
+    <p class="open-to reveal"><svg width="34" height="12" viewBox="0 0 34 12"><path d="M1 6 C 8 2, 16 10, 26 6 M22 2 L 30 6 L 22 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Open to new work and good problems</p>
+    <a class="mail-link reveal" id="contactMail" href="#"></a>
+    <div class="socials reveal" id="socials"></div>
+  </div>
+</section>
+
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Design preview">
+  <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lb-nav prev" id="lbPrev" aria-label="Previous">‹</button>
+  <div class="lb-stage"><figure><img id="lbImg" alt=""><figcaption><b id="lbTitle"></b><span id="lbMeta"></span></figcaption></figure></div>
+  <button class="lb-nav next" id="lbNext" aria-label="Next">›</button>
+</div>
+
+</body>
+</html>

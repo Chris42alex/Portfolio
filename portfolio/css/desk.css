@@ -1,0 +1,152 @@
+/* About desk: the collage of objects (ID badge, music player, résumé card, LED tiles, code editor + palette, terminal) */
+
+/* ---------- Desk collage ---------- */
+#about{position:relative;min-height:1020px;max-width:1640px;margin:0 auto;padding:80px 16px}
+.obj{position:absolute;transition:transform .35s cubic-bezier(.2,.8,.2,1);cursor:grab}
+.obj:hover{transform:rotate(0deg) scale(1.04)!important;z-index:20}
+.reveal{opacity:0;translate:0 40px;transition:opacity .8s, translate .8s}
+.reveal.in{opacity:1;translate:0 0}
+
+/* ID badge on a lanyard — sways, tilts toward the cursor, strokes draw in, photo colours on hover */
+.badge{left:2%;top:10px;width:236px}
+.badge .swing{transform-origin:50% 0;animation:sway 5s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-4deg)}to{transform:rotate(2deg)}}
+.badge:hover .swing{animation:jiggle 1.2s ease-out}
+@keyframes jiggle{0%{transform:rotate(-1deg)}18%{transform:rotate(5deg)}38%{transform:rotate(-4deg)}58%{transform:rotate(2.5deg)}78%{transform:rotate(-1deg)}100%{transform:rotate(0)}}
+.lanyard{display:flex;flex-direction:column;align-items:center}
+.lanyard .strap{width:18px;height:118px;border-radius:2px;background:linear-gradient(90deg,#0d0d0d,#2b2b2b 50%,#0d0d0d)}
+.lanyard .ring{width:18px;height:18px;margin-top:-5px;border:3px solid #b5b5b5;border-radius:50%}
+.lanyard .clip{position:relative;overflow:hidden;width:16px;height:34px;margin-top:-4px;border-radius:4px 4px 8px 8px;
+  background:linear-gradient(90deg,#8a8a8a,#ececec 45%,#979797);box-shadow:inset 0 0 0 4px rgba(0,0,0,.08)}
+.lanyard .clip::after{content:"";position:absolute;inset:0;background:linear-gradient(170deg,transparent 30%,rgba(255,255,255,.95) 50%,transparent 70%);
+  transform:translateY(-100%);animation:shine 3.6s ease-in-out infinite}
+@keyframes shine{0%,70%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
+.idcard{position:relative;width:236px;height:344px;margin-top:-8px;background:#141414;border-radius:16px;overflow:hidden;
+  box-shadow:0 22px 40px rgba(0,0,0,.3);transform:perspective(700px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .2s ease-out}
+.idcard::before{content:"";position:absolute;z-index:6;top:10px;left:50%;width:34px;height:7px;margin-left:-17px;border-radius:4px;background:#2c2c2c;box-shadow:inset 0 1px 2px #000}
+.strokes{position:absolute;z-index:3;inset:0;width:100%;height:100%;pointer-events:none}
+.strokes path{fill:none;stroke:#f1f1f1;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:420}
+.badge.in .strokes path{animation:draw .9s cubic-bezier(.6,0,.3,1) forwards}
+.badge.in .strokes path:nth-child(2){animation-delay:.2s}
+@keyframes draw{to{stroke-dashoffset:0}}
+.idmark{position:absolute;z-index:4;right:18px;top:24px;font:700 20px var(--hand);color:#fff;transform:rotate(-6deg);text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.idphoto{position:absolute;z-index:1;inset:0;overflow:hidden}
+.idphoto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),transparent 22%,transparent 60%,rgba(0,0,0,.55))}
+.idphoto img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(1) contrast(1.2);
+  transform:scale(1.25);transform-origin:48% 28%;transition:filter .6s,transform .6s}
+.badge:hover .idphoto img{filter:grayscale(0) contrast(1.05);transform:scale(1.32)}
+.dash{position:absolute;z-index:4;height:8px;border-radius:6px;background:#4f2bff;transform-origin:left center;transform:rotate(var(--r)) scaleX(0)}
+.d1{width:40px;left:182px;top:150px;--r:-12deg} .d2{width:34px;left:196px;top:186px;--r:38deg} .d3{width:28px;left:176px;top:216px;--r:72deg}
+.badge.in .dash{animation:dashIn .45s cubic-bezier(.3,1.6,.5,1) .9s forwards,dashPulse 2.4s ease-in-out 2s infinite}
+.badge.in .d2{animation-delay:1s,2.2s} .badge.in .d3{animation-delay:1.1s,2.4s}
+@keyframes dashIn{to{transform:rotate(var(--r)) scaleX(1)}}
+@keyframes dashPulse{0%,100%{transform:rotate(var(--r)) scaleX(1)}50%{transform:rotate(var(--r)) scaleX(.6)}}
+.idlabel{position:absolute;z-index:5;left:18px;bottom:52px;padding:3px 18px;background:#4f2bff;color:#fff;font:700 30px/1.1 var(--hand);
+  transform:rotate(-3deg) scale(0);transition:translate .25s}
+.badge.in .idlabel{animation:labelIn .55s cubic-bezier(.3,1.7,.5,1) 1.2s forwards}
+.badge:hover .idlabel{translate:0 -4px}
+@keyframes labelIn{to{transform:rotate(-3deg) scale(1)}}
+
+/* music player */
+.player{left:5%;top:560px;width:250px;background:#fff;border-radius:20px;padding:18px 18px 16px;text-align:center;
+  box-shadow:var(--shadow);transform:rotate(-5deg);cursor:default}
+.player small{font:10px var(--mono);letter-spacing:.2em;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+.player .deck{position:relative;width:150px;height:150px;margin:12px auto 12px}
+.player .disc{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;
+  background:repeating-radial-gradient(#111 0 2px,#1d1d1d 2px 4px);animation:spin 4s linear infinite paused;box-shadow:0 6px 14px rgba(0,0,0,.25)}
+.player.playing .disc{animation-play-state:running}
+.player .disc .label{width:52px;height:52px;border-radius:50%;background:var(--trk,#2fbf71);display:grid;place-items:center;
+  font:800 11px var(--sans);color:#fff;transition:background .4s}
+.player .disc .label::after{content:"";width:6px;height:6px;border-radius:50%;background:#111;position:absolute}
+.player .arm{position:absolute;right:-8px;top:-6px;width:12px;height:90px;transform-origin:6px 6px;transform:rotate(-18deg);transition:transform .6s}
+.player.playing .arm{transform:rotate(8deg)}
+.player .arm::before{content:"";position:absolute;left:0;top:0;width:12px;height:12px;border-radius:50%;background:#bbb;box-shadow:inset 0 0 0 3px #888}
+.player .arm::after{content:"";position:absolute;left:5px;top:8px;width:3px;height:78px;background:#999;border-radius:2px;box-shadow:-2px 76px 0 2px #555}
+@keyframes spin{to{transform:rotate(360deg)}}
+.player h4{font-size:17px;margin:2px 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player .artist{font-size:12px;color:var(--muted)}
+.player .bar{height:4px;background:#eee;border-radius:4px;margin:12px 0 4px;overflow:hidden}
+.player .bar i{display:block;height:100%;width:0;background:var(--ink);border-radius:4px}
+.player .times{display:flex;justify-content:space-between;font:10px var(--mono);color:#999}
+.player .ctrls{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:8px}
+.player .ctrls button{border:0;background:none;cursor:pointer;color:var(--ink);display:grid;place-items:center;width:34px;height:34px;border-radius:50%}
+.player .ctrls button:hover{background:#f0f0f0}
+.player .ctrls .pp{width:46px;height:46px;background:var(--ink);color:#fff}
+.player .ctrls .pp:hover{background:#000}
+.eq{display:inline-flex;gap:2px;align-items:flex-end;height:10px}
+.eq b{width:2px;height:3px;background:#2fbf71;border-radius:1px}
+.player.playing .eq b{animation:eq .8s ease-in-out infinite alternate}
+.eq b:nth-child(2){animation-delay:-.3s!important}.eq b:nth-child(3){animation-delay:-.6s!important}.eq b:nth-child(4){animation-delay:-.15s!important}
+@keyframes eq{to{height:10px}}
+
+.hero-name{left:50%;top:390px;white-space:nowrap;transform:translateX(-50%);text-align:center;cursor:default;pointer-events:none}
+.hero-name h1{font:700 clamp(54px,8vw,96px)/1 var(--hand)}
+.hero-name p{font:12px var(--mono);letter-spacing:.3em;color:var(--muted);margin-top:8px}
+
+/* flip business card */
+/* résumé card — click opens the résumé; on hover a résumé page slides up from behind */
+.bcard{left:27%;top:70px;width:340px;height:200px;transform:rotate(-3deg);cursor:pointer;outline:none}
+.bcard .sheet{position:absolute;z-index:0;left:22px;right:22px;top:0;height:120px;background:#fff;border-radius:6px;padding:12px 14px;
+  box-shadow:0 4px 12px rgba(0,0,0,.12);transform:translateY(8px) rotate(2deg);transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+.bcard .sheet b{display:block;font:800 10px var(--sans);letter-spacing:.2em;color:#9b30ff;margin-bottom:8px}
+.bcard .sheet i{display:block;height:5px;border-radius:3px;background:#e6e2da;margin-bottom:6px}
+.bcard .sheet i:nth-child(3){width:72%} .bcard .sheet i:nth-child(5){width:56%}
+.bcard:hover .sheet,.bcard:focus-visible .sheet{transform:translateY(-44px) rotate(-3deg)}
+.bcard .face{position:absolute;z-index:1;inset:0;border-radius:12px;box-shadow:var(--shadow);padding:20px 22px;overflow:hidden}
+.bcard .front{background:#141414;color:#f5f5f5;display:flex;flex-direction:column;gap:12px}
+.bcard .front::before{content:"";position:absolute;right:-48px;top:-52px;width:118px;height:118px;border-radius:50%;
+  background:conic-gradient(#f24e1e,#ff7262,#a259ff,#1abcfe,#0acf83,#f24e1e);opacity:.9;filter:blur(1px);animation:spin 14s linear infinite}
+.bcard:hover .front::before{animation-duration:3s}
+.bcard ul{position:relative;list-style:none;font:500 13.5px/2.1 var(--mono);color:#fff}
+.bcard li span{display:inline-block;width:26px;color:var(--accent);font-weight:700}
+.bcard li a{color:#fff;text-decoration:none;border-bottom:1px dotted #888}
+.bcard li a:hover{color:#fff;border-color:#fff}
+.bcard .bc-cta{position:absolute;right:16px;bottom:16px;display:inline-flex;align-items:center;gap:6px;background:#fff;color:#141414;
+  font:700 12px var(--sans);padding:8px 14px;border-radius:999px;transition:background .25s,color .25s}
+.bcard .bc-cta b{display:inline-block;transition:transform .25s}
+.bcard:hover .bc-cta{background:var(--accent)}
+.bcard:hover .bc-cta b{transform:translate(2px,-2px)}
+
+.plant{left:50%;top:60px;transform:rotate(4deg);filter:drop-shadow(0 8px 10px rgba(0,0,0,.15))}
+
+.terminal{left:29%;top:620px;width:360px;background:#fafafa;border-radius:12px;box-shadow:var(--shadow);overflow:hidden;transform:rotate(1deg)}
+.terminal .bar{display:flex;align-items:center;gap:6px;padding:10px 12px;background:#ececec;font:11px var(--mono);color:#888}
+.terminal .bar i{width:11px;height:11px;border-radius:50%;display:inline-block}
+.terminal .bar span{flex:1;text-align:center;margin-right:40px}
+.terminal pre{padding:16px;font:12.5px/1.7 var(--mono);color:#333;white-space:pre-wrap;min-height:150px}
+.terminal .cur{display:inline-block;width:7px;height:14px;background:#333;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* LED dot tiles: Figma logo, Claude */
+.led{background:#1e1e1e;border-radius:16px;padding:12px;display:grid;gap:2px;box-shadow:var(--shadow),inset 0 0 0 2px #2c2c2c}
+.led b{width:7.5px;height:7.5px;border-radius:50%;background:#2f2f2f}
+.matrix{left:76%;top:700px;transform:rotate(7deg)}
+.led-claude{left:88%;top:740px;transform:rotate(-3deg)}
+.led b.on{background:var(--c);box-shadow:0 0 5px var(--c);animation:twinkle 3s ease-in-out infinite}
+@keyframes twinkle{50%{opacity:.55}}
+
+/* code editor + design palette collab */
+.studio{right:2%;top:50px;width:390px;height:520px;cursor:default}
+.studio:hover{transform:none!important}
+.editor{position:absolute;left:0;top:0;width:370px;background:#1e1e2e;border-radius:12px;box-shadow:0 18px 40px rgba(0,0,0,.25);
+  transform:rotate(-2deg);overflow:hidden;transition:transform .35s;z-index:1}
+.editor .bar{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#181825}
+.editor .bar i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.editor .tab{margin-left:12px;font:11px var(--mono);color:#cdd6f4;background:#1e1e2e;padding:4px 10px;border-radius:6px 6px 0 0}
+.editor pre{padding:14px 16px 18px;font:12px/1.75 var(--mono);color:#cdd6f4;min-height:220px;white-space:pre;counter-reset:ln}
+.editor .k{color:#cba6f7}.editor .f{color:#89b4fa}.editor .s{color:#a6e3a1}.editor .t{color:#f38ba8}.editor .a{color:#fab387}.editor .p{color:#9399b2}
+.editor .cur{display:inline-block;width:7px;height:14px;background:#cdd6f4;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+.palette{position:absolute;right:0;top:225px;width:270px;background:#fff;border-radius:14px;padding:18px;box-shadow:0 18px 40px rgba(0,0,0,.18);
+  transform:rotate(4deg);transition:transform .35s;z-index:2}
+.editor:hover,.palette:hover{transform:rotate(0) scale(1.04);z-index:3}
+.palette small{font:10px var(--mono);letter-spacing:.2em;color:var(--muted)}
+.palette .sw{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:10px 0 14px}
+.palette .sw div{aspect-ratio:1/1.25;border-radius:8px;position:relative;cursor:pointer;transition:transform .2s}
+.palette .sw div:hover{transform:translateY(-4px)}
+.palette .sw span{position:absolute;bottom:-14px;left:0;right:0;font:8px var(--mono);color:#888;text-align:center}
+.palette .type{display:flex;align-items:center;gap:14px;border-top:1px solid #eee;padding-top:18px;margin-top:6px}
+.palette .type b{font:800 52px/1 var(--sans)}
+.palette .type b+b{font:700 46px/1 var(--hand);color:#a259ff}
+.palette .type p{font:10px/1.6 var(--mono);color:#666}
+.palette .tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.palette .tools span{font:10px var(--mono);padding:3px 8px;border-radius:999px;background:#f2f0ec}

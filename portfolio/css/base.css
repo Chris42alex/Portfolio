@@ -1,0 +1,27 @@
+/* Base: colour tokens, fonts, reset, navigation, grid-paper background */
+
+:root{
+  --ink:#1f1f1f; --muted:#6b6b6b; --paper:#f4f2ee; --grid:#e4e1da;
+  --dark:#2f2f2f; --card:#fff; --accent:#f4b942; --shadow:0 10px 30px rgba(0,0,0,.12);
+  --mono:'JetBrains Mono',ui-monospace,monospace; --sans:'Inter',system-ui,sans-serif; --hand:'Caveat',cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);overflow-x:hidden}
+a{color:inherit}
+
+/* ---------- Nav ---------- */
+nav{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-200%);z-index:50;
+  display:flex;gap:4px;padding:6px;background:rgba(255,255,255,.8);backdrop-filter:blur(10px);
+  border-radius:999px;box-shadow:var(--shadow);transition:transform .4s}
+nav.show{transform:translateX(-50%) translateY(0)}
+nav .nav-resume{display:none;background:var(--accent);color:var(--ink)} /* phones only — the résumé card is hidden there */
+nav .nav-resume:hover{background:#e9aa2c}
+nav a{text-decoration:none;font-size:14px;padding:8px 16px;border-radius:999px;font-weight:600}
+nav a:hover{background:#eee}
+nav .logo{background:var(--ink);color:#fff}
+
+/* ---------- Grid paper sections ---------- */
+.paper{background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:44px 44px}
